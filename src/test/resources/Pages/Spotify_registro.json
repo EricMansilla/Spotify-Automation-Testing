@@ -1,0 +1,14 @@
+{
+    "Email": {
+      "GetFieldBy": "id",
+      "ValueToFind": "email"
+    },
+    "Email-confirmacion": {
+      "GetFieldBy": "id",
+      "ValueToFind": "confirm"
+    },
+    "Pass": {
+      "GetFieldBy": "id",
+      "ValueToFind": "password"
+    }
+}
