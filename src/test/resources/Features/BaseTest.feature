@@ -21,6 +21,15 @@ Feature: SpotifyRegisterTest
   Scenario: Handle Dropdown
     Given I am in App main site
     Then I load the DOM Information Spotify_registro.json
-    And I wait for element Mes de Nacimiento to be present
-    And I set text Febrero in dropdown Mes de Nacimiento
-    And I set index 03 in dropdown Mes de Nacimiento
+    And I wait for element Birth Month to be present
+    And I set text Febrero in dropdown Birth Month
+    And I set index 03 in dropdown Birth Month
+
+  @test
+  Scenario: I check if Email is registered
+    Given I am in App main site
+    Then I load the DOM Information Spotify_registro.json
+    And I click on element Email
+    And I set Email with text prueba@prueba.com
+    And I click on element Confirmation Email
+    Then I check if Email Error error message is true

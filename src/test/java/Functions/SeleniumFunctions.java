@@ -6,6 +6,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -45,6 +47,7 @@ public class SeleniumFunctions {
     private static String GetFieldBy = "";
     private static String ValueToFind = "";
     public static final int EXPLICIT_TIMEOUT = 5;
+    public static boolean isDisplayed = Boolean.parseBoolean(null);
 
     public static Object readJson() throws Exception {
         FileReader reader = new FileReader(PagesFilePath + FileName);
@@ -171,6 +174,20 @@ public class SeleniumFunctions {
         WebDriverWait w = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
         log.info("Waiting for the element: " + element+ " to be visible");
         w.until(ExpectedConditions.elementToBeClickable(SeleniumElement));
+    }
+
+    public boolean isElementDisplayed(String element) throws Exception {
+        try {
+            By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+            log.info(String.format("Waiting Element: %s", element));
+            WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
+            isDisplayed = wait.until(ExpectedConditions.presenceOfElementLocated(SeleniumElement)).isDisplayed();
+        } catch (NoSuchElementException | TimeoutException e){
+            isDisplayed = false;
+            log.info(e);
+        }
+        log.info(String.format("%s visibility is: %s", element, isDisplayed));
+        return isDisplayed;
     }
 
 }

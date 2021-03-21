@@ -3,7 +3,7 @@
     "GetFieldBy": "id",
     "ValueToFind": "email"
   },
-  "Email-confirmacion": {
+  "Confirmation Email": {
     "GetFieldBy": "id",
     "ValueToFind": "confirm"
   },
@@ -15,8 +15,12 @@
     "GetFieldBy": "Xpath",
     "ValueToFind": "//*[@id=\"__next\"]/main/div[2]/form/h2"
   },
-  "Mes de Nacimiento": {
+  "Birth Month": {
     "GetFieldBy": "xpath",
     "ValueToFind": "//*[@id=\"month\"]"
+  },
+  "Email Error": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "//body/div[@id='__next']/main[1]/div[2]/form[1]/div[1]/div[2]/span[1]"
   }
 }

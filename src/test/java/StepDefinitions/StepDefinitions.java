@@ -5,6 +5,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -100,4 +101,9 @@ public class StepDefinitions {
         functions.waitForElementVisible(element);
     }
 
+    @Then("I check if (.*) error message is (.*)")
+    public void iCheckIfErrorMessageIs(String element, String state) throws Exception {
+        boolean actual = functions.isElementDisplayed(element);
+        Assert.assertEquals("El estado es diferente al esperado", actual, Boolean.valueOf(state));
+    }
 }
