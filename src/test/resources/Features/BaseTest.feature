@@ -21,5 +21,6 @@ Feature: SpotifyRegisterTest
   Scenario: Handle Dropdown
     Given I am in App main site
     Then I load the DOM Information Spotify_registro.json
+    And I wait for element Mes de Nacimiento to be present
     And I set text Febrero in dropdown Mes de Nacimiento
     And I set index 03 in dropdown Mes de Nacimiento

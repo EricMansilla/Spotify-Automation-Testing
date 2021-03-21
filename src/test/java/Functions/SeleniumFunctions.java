@@ -7,7 +7,9 @@ import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -42,6 +44,7 @@ public class SeleniumFunctions {
 
     private static String GetFieldBy = "";
     private static String ValueToFind = "";
+    public static final int EXPLICIT_TIMEOUT = 5;
 
     public static Object readJson() throws Exception {
         FileReader reader = new FileReader(PagesFilePath + FileName);
@@ -142,11 +145,32 @@ public class SeleniumFunctions {
         opt.selectByVisibleText(option);
     }
 
-    public ISelect selectOption(String element) throws Exception {
+    public Select selectOption(String element) throws Exception {
         By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
         log.info(String.format("Waiting Element: %s", element));
         Select opt = new Select(driver.findElement(SeleniumElement));
         return opt;
+    }
+
+    public void waitForElementPresent(String element) throws Exception {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        WebDriverWait w = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
+        log.info("Waiting for the element: " + element + " to be present");
+        w.until(ExpectedConditions.presenceOfElementLocated(SeleniumElement));
+    }
+
+    public void waitForElementVisible(String element) throws Exception {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        WebDriverWait w = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
+        log.info("Waiting for the element: " + element+ " to be visible");
+        w.until(ExpectedConditions.visibilityOfElementLocated(SeleniumElement));
+    }
+
+    public void waitForElementClickable(String element) throws Exception {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        WebDriverWait w = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
+        log.info("Waiting for the element: " + element+ " to be visible");
+        w.until(ExpectedConditions.elementToBeClickable(SeleniumElement));
     }
 
 }
