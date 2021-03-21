@@ -1,22 +1,48 @@
 package Functions;
 
+import StepDefinitions.StepDefinitions;
+import StepDefinitions.Hooks;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 public class SeleniumFunctions {
 
+    WebDriver driver;
+
+    public SeleniumFunctions() {
+        driver = Hooks.driver;
+    }
+
+    /******** Page path ********/
     public static String FileName = "";
     public static String PagesFilePath = "src/test/resources/Pages/";
-    private static String GetFieldBy = "";
-    private static String ValueToFind = "";
+
+    /******** Scenario Test Data ********/
+    public static Map<String, String> ScenarioData = new HashMap<>();
+    public static String Environment = "";
+
+    /******** Test Properties Config ********/
+    public static Properties prop = new Properties();
+    public static InputStream in = SeleniumFunctions.class.getResourceAsStream("../test.properties");
 
     /******** Log Attribute ********/
     private static Logger log = Logger.getLogger(SeleniumFunctions.class);
+
+    private static String GetFieldBy = "";
+    private static String ValueToFind = "";
 
     public static Object readJson() throws Exception {
         FileReader reader = new FileReader(PagesFilePath + FileName);
@@ -67,6 +93,54 @@ public class SeleniumFunctions {
             result = By.xpath(ValueToFind);
         }
         return result;
+    }
+
+    public String readProperties(String property) throws IOException {
+        prop.load(in);
+        return prop.getProperty(property);
+    }
+
+    public void SaveInScenario(String key, String text) {
+        if (!this.ScenarioData.containsKey(key)) {
+            this.ScenarioData.put(key,text);
+            log.info(String.format("Save as Scenario Context key: %s with value: %s ", key,text));
+            System.out.println((String.format("Save as Scenario Context key: %s with value: %s ", key,text)));
+        } else {
+            this.ScenarioData.replace(key,text);
+            log.info(String.format("Update Scenario Context key: %s with value: %s ", key,text));
+        }
+    }
+
+    public void RetrieveTestData(String parameter) throws IOException {
+        Environment = readProperties("Environment");
+        try {
+            SaveInScenario(parameter, readProperties(parameter + "." + Environment));
+            System.out.println(parameter + ": " + this.ScenarioData.get(parameter));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void iSetElementWithKeyValue(String element, String key) throws Exception {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        boolean exist = this.ScenarioData.containsKey(key);
+        if (exist){
+            String text = this.ScenarioData.get(key);
+            driver.findElement(SeleniumElement).sendKeys(text);
+            log.info(String.format("Set on element %s with text %s", element, text));
+            System.out.println((String.format("Set on element %s with text %s", element, text)));
+        }else{
+            Assert.assertTrue(String.format("The given key %s do not exist in Context", key), this.ScenarioData.containsKey(key));
+        }
+    }
+
+    public void selectOptionDropdownByText(String element, String option) throws Exception
+    {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        log.info(String.format("Waiting Element: %s", element));
+        Select opt = new Select(driver.findElement(SeleniumElement));
+        log.info("Select option: " + option + "by text");
+        opt.selectByVisibleText(option);
     }
 
 }

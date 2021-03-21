@@ -1,14 +1,18 @@
 {
-    "Email": {
-      "GetFieldBy": "id",
-      "ValueToFind": "email"
-    },
-    "Email-confirmacion": {
-      "GetFieldBy": "id",
-      "ValueToFind": "confirm"
-    },
-    "Pass": {
-      "GetFieldBy": "id",
-      "ValueToFind": "password"
-    }
+  "Email": {
+    "GetFieldBy": "id",
+    "ValueToFind": "email"
+  },
+  "Email-confirmacion": {
+    "GetFieldBy": "id",
+    "ValueToFind": "confirm"
+  },
+  "Pass": {
+    "GetFieldBy": "id",
+    "ValueToFind": "password"
+  },
+  "Title": {
+    "GetFieldBy": "Xpath",
+    "ValueToFind": "//*[@id=\"__next\"]/main/div[2]/form/h2"
+  }
 }

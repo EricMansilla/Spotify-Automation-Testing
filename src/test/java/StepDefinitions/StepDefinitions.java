@@ -14,10 +14,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class StepDefinitions {
-
-    private static Properties prop = new Properties();
-    private static InputStream in = CreateDriver.class.getResourceAsStream("../test.properties");
     WebDriver driver;
+    SeleniumFunctions functions = new SeleniumFunctions();
 
     /******** Log Attribute ********/
     Logger log = Logger.getLogger(StepDefinitions.class);
@@ -28,8 +26,7 @@ public class StepDefinitions {
 
     @Given("^I am in App main site")
     public void iAmInAppMainSite() throws IOException {
-        prop.load(in);
-        String url = prop.getProperty("MainAppUrlBase");
+        String url = functions.readProperties("MainAppUrlBase");
         log.info("Navigate to: " + url);
         driver.get(url);
     }
@@ -61,9 +58,20 @@ public class StepDefinitions {
         log.info("Sended " + text + "to element " + element);
     }
 
+    @Given("I set (.*) value in Data Scenario")
+    public void iSetUserEmailValueInDataScenario(String parameter) throws IOException {
+        functions.RetrieveTestData(parameter);
+    }
 
-    @Then("I close the window")
-    public void iCloseTheWindow() {
-        driver.quit();
+    @And("^I Save text of (.*?) as Scenario Context$")
+    public void iSaveTextOfElementAsScenarioContext(String element) throws Exception {
+        By SeleniumElem = SeleniumFunctions.getCompleteElement(element);
+        String ScenarioElementText = driver.findElement(SeleniumElem).getText();
+        functions.SaveInScenario(element+".text", ScenarioElementText);
+    }
+
+    @And("^I set (.*?) with key value (.*?)$")
+    public void iSetWithKeyValue(String element, String key) throws Exception {
+        functions.iSetElementWithKeyValue(element, key);
     }
 }
