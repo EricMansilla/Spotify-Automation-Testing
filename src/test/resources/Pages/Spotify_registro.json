@@ -14,5 +14,9 @@
   "Title": {
     "GetFieldBy": "Xpath",
     "ValueToFind": "//*[@id=\"__next\"]/main/div[2]/form/h2"
+  },
+  "Mes de Nacimiento": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "//*[@id=\"month\"]"
   }
 }

@@ -1,6 +1,5 @@
 package StepDefinitions;
 
-import Functions.CreateDriver;
 import Functions.SeleniumFunctions;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -8,10 +7,9 @@ import cucumber.api.java.en.Then;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 
 public class StepDefinitions {
     WebDriver driver;
@@ -74,4 +72,17 @@ public class StepDefinitions {
     public void iSetWithKeyValue(String element, String key) throws Exception {
         functions.iSetElementWithKeyValue(element, key);
     }
+
+    @And("I set text (.*) in dropdown (.*)")
+    public void iSetTextInDropdown(String option, String element) throws Exception {
+        Select opt = functions.selectOption(element);
+        opt.selectByVisibleText(option);
+    }
+
+    @And("I set index (.*) in dropdown (.*)")
+    public void iSetIndexInDropdown(int index, String element) throws Exception {
+        Select opt = functions.selectOption(element);
+        opt.selectByIndex(index);
+    }
+
 }

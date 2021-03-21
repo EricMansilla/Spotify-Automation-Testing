@@ -16,3 +16,10 @@ Feature: SpotifyRegisterTest
     Then I load the DOM Information Spotify_registro.json
     And I click on element Email
     And I set Email with text prueba@prueba.com
+  
+  @test
+  Scenario: Handle Dropdown
+    Given I am in App main site
+    Then I load the DOM Information Spotify_registro.json
+    And I set text Febrero in dropdown Mes de Nacimiento
+    And I set index 03 in dropdown Mes de Nacimiento

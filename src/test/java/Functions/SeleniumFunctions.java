@@ -1,6 +1,5 @@
 package Functions;
 
-import StepDefinitions.StepDefinitions;
 import StepDefinitions.Hooks;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -141,6 +140,13 @@ public class SeleniumFunctions {
         Select opt = new Select(driver.findElement(SeleniumElement));
         log.info("Select option: " + option + "by text");
         opt.selectByVisibleText(option);
+    }
+
+    public ISelect selectOption(String element) throws Exception {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        log.info(String.format("Waiting Element: %s", element));
+        Select opt = new Select(driver.findElement(SeleniumElement));
+        return opt;
     }
 
 }
