@@ -61,3 +61,11 @@ Feature: SpotifyRegisterTest
     Then I load the DOM Information Amazon.json
     And I click in JS element Account
     And I wait for element My Orders to be present
+
+  @test
+  Scenario: Scroll to
+    Given I navigate to https://www.amazon.es/
+    Then I load the DOM Information Amazon.json
+    And I scroll to element Top Sales
+    And I scroll to bottom of page
+    And I scroll to top of page

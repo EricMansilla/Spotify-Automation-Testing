@@ -223,4 +223,17 @@ public class SeleniumFunctions {
         jse.executeScript("arguments[0].click()", driver.findElement(SeleniumElement));
     }
 
+    public void scrollPage(String to) throws Exception {
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        if(to.equals("top")){
+            log.info("Scrolling to the top of the page");
+            jse.executeScript("scroll(0, -250);");
+
+        }
+        else if(to.equals("bottom")){
+            log.info("Scrolling to bottom of the page");
+            jse.executeScript("scroll(0, 250);");
+        }
+    }
+
 }
