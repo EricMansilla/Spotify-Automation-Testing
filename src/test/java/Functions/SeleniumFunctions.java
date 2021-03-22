@@ -190,4 +190,16 @@ public class SeleniumFunctions {
         return isDisplayed;
     }
 
+    public void switchToFrame(String Frame) throws Exception {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(Frame);
+        log.info("Switching to frame: " + Frame);
+        driver.switchTo().frame(driver.findElement(SeleniumElement));
+    }
+
+    public void switchToParentFrame() {
+        log.info("Switching to parent frame");
+        driver.switchTo().parentFrame();
+    }
+
+
 }

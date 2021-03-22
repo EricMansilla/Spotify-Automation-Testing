@@ -101,9 +101,19 @@ public class StepDefinitions {
         functions.waitForElementVisible(element);
     }
 
-    @Then("I check if (.*) error message is (.*)")
+    @Then("I check if (.*) error message is displayed=(.*)")
     public void iCheckIfErrorMessageIs(String element, String state) throws Exception {
         boolean actual = functions.isElementDisplayed(element);
         Assert.assertEquals("El estado es diferente al esperado", actual, Boolean.valueOf(state));
+    }
+
+    @And("^I switch to Frame: (.*)")
+    public void iSwitchToFrame(String frame) throws Exception {
+        functions.switchToFrame(frame);
+    }
+
+    @And("I switch to parent frame")
+    public void iSwitchToParentFrame() {
+        functions.switchToParentFrame();
     }
 }

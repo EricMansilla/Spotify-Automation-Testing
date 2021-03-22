@@ -32,4 +32,15 @@ Feature: SpotifyRegisterTest
     And I click on element Email
     And I set Email with text prueba@prueba.com
     And I click on element Confirmation Email
-    Then I check if Email Error error message is true
+    Then I check if Email Error error message is displayed=true
+
+  @frames
+  Scenario: Handle various functions
+    Given I navigate to https://chercher.tech/practice/frames-example-selenium-webdriver
+    Then I load the DOM Information Frames.json
+    And I switch to Frame: Frame2
+    And I set text Avatar in dropdown Frame2 Select
+    And I switch to parent frame
+    And I switch to Frame: Frame1
+    And I set Frame1 input with text Esto es una prueba
+    Then I switch to Frame: Frame3
