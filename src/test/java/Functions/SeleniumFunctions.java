@@ -201,5 +201,24 @@ public class SeleniumFunctions {
         driver.switchTo().parentFrame();
     }
 
+    public void checkCheckbox(String element) throws Exception
+    {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        boolean isChecked = driver.findElement(SeleniumElement).isSelected();
+        if(!isChecked){
+            log.info("Clicking on the checkbox to select: " + element);
+            driver.findElement(SeleniumElement).click();
+        }
+    }
+
+    public void UncheckCheckbox(String element) throws Exception
+    {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        boolean isChecked = driver.findElement(SeleniumElement).isSelected();
+        if(isChecked){
+            log.info("Clicking on the checkbox to select: " + element);
+            driver.findElement(SeleniumElement).click();
+        }
+    }
 
 }

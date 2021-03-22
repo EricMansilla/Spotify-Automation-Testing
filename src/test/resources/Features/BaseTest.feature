@@ -44,3 +44,13 @@ Feature: SpotifyRegisterTest
     And I switch to Frame: Frame1
     And I set Frame1 input with text Esto es una prueba
     Then I switch to Frame: Frame3
+
+  @CheckBoxes
+  Scenario: Handle CheckBoxes
+    Given I am in App main site
+    Then I load the DOM Information Spotify_registro.json
+    And I check the checkbox Thirdparty
+    And I check the checkbox Male
+    And I check the checkbox Female
+    And I check the checkbox Non-Binary
+    And I uncheck the checkbox Thirdparty

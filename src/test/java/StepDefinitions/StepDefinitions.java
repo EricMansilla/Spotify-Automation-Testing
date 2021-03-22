@@ -4,6 +4,7 @@ import Functions.SeleniumFunctions;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -116,4 +117,19 @@ public class StepDefinitions {
     public void iSwitchToParentFrame() {
         functions.switchToParentFrame();
     }
+
+    /** Check an option from a checkbox */
+    @When("^I check the checkbox (.*?)$")
+    public void checkCheckbox(String element) throws Exception
+    {
+        functions.checkCheckbox(element);
+    }
+
+    /** Check an option from a checkbox */
+    @When("^I uncheck the checkbox (.*?)$")
+    public void UncheckCheckbox(String element) throws Exception
+    {
+        functions.UncheckCheckbox(element);
+    }
+
 }

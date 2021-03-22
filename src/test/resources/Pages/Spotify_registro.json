@@ -12,7 +12,7 @@
     "ValueToFind": "password"
   },
   "Title": {
-    "GetFieldBy": "Xpath",
+    "GetFieldBy": "xpath",
     "ValueToFind": "//*[@id=\"__next\"]/main/div[2]/form/h2"
   },
   "Birth Month": {
@@ -22,5 +22,21 @@
   "Email Error": {
     "GetFieldBy": "xpath",
     "ValueToFind": "//body/div[@id='__next']/main[1]/div[2]/form[1]/div[1]/div[2]/span[1]"
+  },
+  "Male": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "//*[@id=\"__next\"]/main/div[2]/form/div[6]/div[2]/label[1]/span[1]"
+  },
+  "Female": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "//*[@id=\"__next\"]/main/div[2]/form/div[6]/div[2]/label[2]/span[1]"
+  },
+  "Non-Binary": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "//*[@id=\"__next\"]/main/div[2]/form/div[6]/div[2]/label[3]/span[1]"
+  },
+  "Thirdparty": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "//*[@id=\"__next\"]/main/div[2]/form/div[7]/label/span[1]"
   }
 }
