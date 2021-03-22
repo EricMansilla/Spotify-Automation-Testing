@@ -43,7 +43,7 @@ public class SeleniumFunctions {
 
     private static String GetFieldBy = "";
     private static String ValueToFind = "";
-    public static final int EXPLICIT_TIMEOUT = 5;
+    public static final int EXPLICIT_TIMEOUT = 10;
     public static boolean isDisplayed = Boolean.parseBoolean(null);
 
     public static Object readJson() throws Exception {
@@ -234,6 +234,13 @@ public class SeleniumFunctions {
             log.info("Scrolling to bottom of the page");
             jse.executeScript("scroll(0, 250);");
         }
+    }
+
+    public void pageHasLoaded (){
+        String GetActual = driver.getCurrentUrl();
+        System.out.println(String.format("Checking if %s page is loaded.", GetActual));
+        log.info(String.format("Checking if %s page is loaded.", GetActual));
+        new WebDriverWait(driver, EXPLICIT_TIMEOUT).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 
 }

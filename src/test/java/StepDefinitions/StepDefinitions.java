@@ -29,12 +29,14 @@ public class StepDefinitions {
         String url = functions.readProperties("MainAppUrlBase");
         log.info("Navigate to: " + url);
         driver.get(url);
+        functions.pageHasLoaded();
     }
 
     @Given("^I navigate to (.*)$")
     public void navigateTo(String url) {
         log.info("Navigate to: " + url);
         driver.get(url);
+        functions.pageHasLoaded();
     }
 
     @Then("^I load the DOM Information (.*)$")
