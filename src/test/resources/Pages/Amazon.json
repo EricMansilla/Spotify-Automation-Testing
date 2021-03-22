@@ -1,0 +1,10 @@
+{
+  "Account": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "//*[@id='nav-al-your-account']/a[1]/span"
+  },
+  "My Orders": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "//*[@id='a-page']/div[2]/div/div[2]/div[1]/a/div/div"
+  }
+}

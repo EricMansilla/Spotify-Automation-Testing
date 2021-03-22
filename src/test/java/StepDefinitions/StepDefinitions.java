@@ -132,4 +132,8 @@ public class StepDefinitions {
         functions.UncheckCheckbox(element);
     }
 
+    @And("^I click in JS element (.*)$")
+    public void iClickInJSElementSobreAmazon(String element) throws Exception {
+        functions.clickJSElement(element);
+    }
 }

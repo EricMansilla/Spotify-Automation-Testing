@@ -54,3 +54,10 @@ Feature: SpotifyRegisterTest
     And I check the checkbox Female
     And I check the checkbox Non-Binary
     And I uncheck the checkbox Thirdparty
+
+  @test
+  Scenario: Click on JS element
+    Given I navigate to https://www.amazon.es/
+    Then I load the DOM Information Amazon.json
+    And I click in JS element Account
+    And I wait for element My Orders to be present

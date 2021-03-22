@@ -5,10 +5,7 @@ import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -139,8 +136,7 @@ public class SeleniumFunctions {
         }
     }
 
-    public void selectOptionDropdownByText(String element, String option) throws Exception
-    {
+    public void selectOptionDropdownByText(String element, String option) throws Exception {
         By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
         log.info(String.format("Waiting Element: %s", element));
         Select opt = new Select(driver.findElement(SeleniumElement));
@@ -201,8 +197,7 @@ public class SeleniumFunctions {
         driver.switchTo().parentFrame();
     }
 
-    public void checkCheckbox(String element) throws Exception
-    {
+    public void checkCheckbox(String element) throws Exception {
         By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
         boolean isChecked = driver.findElement(SeleniumElement).isSelected();
         if(!isChecked){
@@ -219,6 +214,13 @@ public class SeleniumFunctions {
             log.info("Clicking on the checkbox to select: " + element);
             driver.findElement(SeleniumElement).click();
         }
+    }
+
+    public void clickJSElement(String element) throws Exception {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        log.info("Scrolling to element: " + element);
+        jse.executeScript("arguments[0].click()", driver.findElement(SeleniumElement));
     }
 
 }
