@@ -69,3 +69,24 @@ Feature: SpotifyRegisterTest
     And I scroll to element Top Sales
     And I scroll to bottom of page
     And I scroll to top of page
+
+  @test
+  Scenario: Open New Tab
+    Given I am in App main site
+    And I open new tab with URL https://chercher.tech/practice/frames-example-selenium-webdriver
+    And I go to Practice window
+    Then I load the DOM Information Frames.json
+    And I switch to Frame: Frame2
+    And I set text Avatar in dropdown Frame2 Select
+    And I go to Principal window
+    And I open new tab with URL https://www.google.com
+    And I go to Google window
+    And I open new tab with URL https://www.amazon.es/
+    And I go to Amazon window
+    And I go to Practice window
+    And I go to Principal window
+    And I go to Amazon window
+    Then I load the DOM Information Amazon.json
+    And I scroll to element Top Sales
+    And I click in JS element Account
+    And I wait for element My Orders to be present

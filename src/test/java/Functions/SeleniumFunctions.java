@@ -33,6 +33,7 @@ public class SeleniumFunctions {
     /******** Scenario Test Data ********/
     public static Map<String, String> ScenarioData = new HashMap<>();
     public static String Environment = "";
+    public static Map<String, String> HandleMyWindows = new HashMap<>();
 
     /******** Test Properties Config ********/
     public static Properties prop = new Properties();
@@ -241,6 +242,27 @@ public class SeleniumFunctions {
         System.out.println(String.format("Checking if %s page is loaded.", GetActual));
         log.info(String.format("Checking if %s page is loaded.", GetActual));
         new WebDriverWait(driver, EXPLICIT_TIMEOUT).until(webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+    }
+
+    public void OpenNewTabWithURL(String URL) {
+        log.info("Open New tab with URL: " + URL);
+        System.out.println("Open New tab with URL: " + URL);
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript(String.format("window.open('%s','_blank');", URL));
+    }
+
+    public void WindowsHandle(String WindowName){
+        if (this.HandleMyWindows.containsKey(WindowName)) {
+            driver.switchTo().window(this.HandleMyWindows.get(WindowName));
+            log.info(String.format("I go to Windows: %s with value: %s ", WindowName ,this.HandleMyWindows.get(WindowName)));
+        } else {
+            for(String winHandle : driver.getWindowHandles()){
+                this.HandleMyWindows.put(WindowName, winHandle);
+                System.out.println("The New window " + WindowName + " is saved in scenario with value " + this.HandleMyWindows.get(WindowName));
+                log.info("The New window "+ WindowName + " is saved in scenario with value " + this.HandleMyWindows.get(WindowName));
+                driver.switchTo().window(this.HandleMyWindows.get(WindowName));
+            }
+        }
     }
 
 }
