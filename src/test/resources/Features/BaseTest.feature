@@ -90,3 +90,12 @@ Feature: SpotifyRegisterTest
     And I scroll to element Top Sales
     And I click in JS element Account
     And I wait for element My Orders to be present
+
+  @test
+  Scenario: Handle Alerts
+    Given I navigate to https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_alert
+    Then I load the DOM Information Alert.json
+    And I switch to Frame: Alert Frame
+    And I click on element Alert
+    And I wait 8 seconds
+    Then I accept alert

@@ -1,0 +1,10 @@
+{
+  "Alert": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "/html/body/button"
+  },
+  "Alert Frame": {
+    "GetFieldBy": "xpath",
+    "ValueToFind": "//*[@id='iframeResult']"
+  }
+}

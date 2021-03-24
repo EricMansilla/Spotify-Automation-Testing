@@ -172,4 +172,14 @@ public class StepDefinitions {
         functions.WindowsHandle(WindowsName);
     }
 
+    @And("I wait (.*) seconds")
+    public void iWaitSeconds(int seconds) throws InterruptedException {
+        int secs = seconds * 1000;
+        Thread.sleep(secs);
+    }
+
+    @Then("^I (accept|dismiss) alert$")
+    public void iAcceptAlert(String req) {
+        functions.handleAlert(req);
+    }
 }

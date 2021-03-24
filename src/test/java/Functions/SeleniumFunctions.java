@@ -265,4 +265,22 @@ public class SeleniumFunctions {
         }
     }
 
+    public void handleAlert(String req) {
+        try{
+            WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            System.out.println("Alert Text Content: " + alert.getText());
+            if (req == "Accept") {
+                alert.accept();
+                System.out.println("Alert accepted");
+            } else {
+                alert.dismiss();
+                System.out.println("Alert dismissed");
+            }
+            log.info("The alert was accepted successfully.");
+        }catch(Throwable e){
+            log.error("Error came while waiting for the alert popup. "+ e.getMessage());
+        }
+    }
+
 }
