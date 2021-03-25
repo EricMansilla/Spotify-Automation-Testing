@@ -30,6 +30,7 @@ public class StepDefinitions {
         log.info("Navigate to: " + url);
         driver.get(url);
         functions.pageHasLoaded();
+        // If the screenshot method returns a blank screen, comment the line below
         functions.WindowsHandle("Principal");
     }
 
@@ -181,5 +182,10 @@ public class StepDefinitions {
     @Then("^I (accept|dismiss) alert$")
     public void iAcceptAlert(String req) {
         functions.handleAlert(req);
+    }
+
+    @And("^I take screenshot: (.*?)$")
+    public void iTakeScreenshot(String TestCaptura) throws IOException {
+        functions.ScreenShot(TestCaptura);
     }
 }

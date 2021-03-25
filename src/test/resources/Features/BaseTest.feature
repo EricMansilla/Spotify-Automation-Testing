@@ -99,3 +99,9 @@ Feature: SpotifyRegisterTest
     And I click on element Alert
     And I wait 8 seconds
     Then I accept alert
+
+  @test
+  Scenario: Take a ScreenShot
+    Given I am in App main site
+    And I wait 5 seconds
+    And I take screenshot: HolyScreen

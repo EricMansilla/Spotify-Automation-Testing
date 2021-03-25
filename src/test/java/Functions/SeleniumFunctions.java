@@ -1,6 +1,7 @@
 package Functions;
 
 import StepDefinitions.Hooks;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -10,10 +11,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -281,6 +281,14 @@ public class SeleniumFunctions {
         }catch(Throwable e){
             log.error("Error came while waiting for the alert popup. "+ e.getMessage());
         }
+    }
+
+    public void ScreenShot(String TestCaptura) throws IOException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmm");
+        String screenShotName = readProperties("ScreenShotPath") + "\\" + readProperties("browser") + "\\" + TestCaptura + "_(" + dateFormat.format(GregorianCalendar.getInstance().getTime()) + ")";
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        log.info("Screenshot saved as:" + screenShotName);
+        FileUtils.copyFile(scrFile, new File(String.format("%s.png", screenShotName)));
     }
 
 }
