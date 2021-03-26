@@ -45,7 +45,7 @@ Feature: SpotifyRegisterTest
     And I set Frame1 input with text Esto es una prueba
     Then I switch to Frame: Frame3
 
-  @CheckBoxes
+  @checkBoxes
   Scenario: Handle CheckBoxes
     Given I am in App main site
     Then I load the DOM Information Spotify_registro.json
@@ -100,8 +100,37 @@ Feature: SpotifyRegisterTest
     And I wait 8 seconds
     Then I accept alert
 
-  @test
+  @screenshot
   Scenario: Take a ScreenShot
     Given I am in App main site
     And I wait 5 seconds
     And I take screenshot: HolyScreen
+
+  @assertions
+  Scenario: Assert contain text
+    Given I am in App main site
+    Then I load the DOM Information Spotify_registro.json
+    And I click on element Email
+    And I set Email with text eric.324.st@gmail.com
+    And I click on element Confirmation Email
+    Then Assert if Email Error contains text Este correo electrónico ya está conectado a una cuenta. Inicia sesión.
+    Then Assert if Email Error is equal to Este correo electrónico ya está conectado a una cuenta. Inicia sesión.
+
+  @assertions
+  Scenario: Assert not contain text
+    Given I am in App main site
+    Then I load the DOM Information Spotify_registro.json
+    And I click on element Email
+    And I set Email with text eric.324.st@gmail.com
+    And I click on element Confirmation Email
+    Then Check if Email Error NOT contains text COVID-19
+
+  @assertions
+  Scenario: Elements is/is not present
+    Given I am in App main site
+    Then I load the DOM Information Spotify_registro.json
+    And I click on element Email
+    Then Check if Email Error is NOT Displayed
+    And I set Email with text eric.324.st@gmail.com
+    And I click on element Confirmation Email
+    Then Assert if Email Error is Displayed

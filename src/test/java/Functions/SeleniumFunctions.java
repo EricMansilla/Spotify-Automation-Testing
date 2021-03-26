@@ -33,6 +33,7 @@ public class SeleniumFunctions {
     /******** Scenario Test Data ********/
     public static Map<String, String> ScenarioData = new HashMap<>();
     public static String Environment = "";
+    public String ElementText = "";
     public static Map<String, String> HandleMyWindows = new HashMap<>();
 
     /******** Test Properties Config ********/
@@ -269,7 +270,8 @@ public class SeleniumFunctions {
         try{
             WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-            System.out.println("Alert Text Content: " + alert.getText());
+            ElementText = alert.getText();
+            System.out.println("Alert Text Content: " + ElementText);
             if (req == "Accept") {
                 alert.accept();
                 System.out.println("Alert accepted");
@@ -289,6 +291,33 @@ public class SeleniumFunctions {
         File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         log.info("Screenshot saved as:" + screenShotName);
         FileUtils.copyFile(scrFile, new File(String.format("%s.png", screenShotName)));
+    }
+
+    public String GetTextElement(String element) throws Exception {
+        By SeleniumElement = SeleniumFunctions.getCompleteElement(element);
+        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
+        wait.until(ExpectedConditions.presenceOfElementLocated(SeleniumElement));
+        log.info(String.format("Esperando el elemento: %s", element));
+        ElementText = driver.findElement(SeleniumElement).getText();
+        return ElementText;
+    }
+
+    public void checkPartialTextElementNotPresent(String element, String text) throws Exception {
+        ElementText = GetTextElement(element);
+        boolean isFoundFalse = ElementText.indexOf(text) !=-1? true: false;
+        Assert.assertFalse("Text is present in element: " + element + " current text is: " + ElementText, isFoundFalse);
+
+    }
+
+    public void checkPartialTextElementPresent(String element, String text) throws Exception {
+        ElementText = GetTextElement(element);
+        boolean isFound = ElementText.indexOf(text) !=-1? true: false;
+        Assert.assertTrue("Text is not present in element: " + element + " current text is: " + ElementText, isFound);
+    }
+
+    public void checkTextElementEqualTo(String element, String text) throws Exception {
+        ElementText = GetTextElement(element);
+        Assert.assertEquals("Text is not present in element: " + element + " current text is: " + ElementText, text, ElementText);
     }
 
 }

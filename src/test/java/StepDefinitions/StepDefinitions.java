@@ -28,10 +28,9 @@ public class StepDefinitions {
     public void iAmInAppMainSite() throws IOException {
         String url = functions.readProperties("MainAppUrlBase");
         log.info("Navigate to: " + url);
+        functions.WindowsHandle("Principal");
         driver.get(url);
         functions.pageHasLoaded();
-        // If the screenshot method returns a blank screen, comment the line below
-        functions.WindowsHandle("Principal");
     }
 
     @Given("^I navigate to (.*)$")
@@ -188,4 +187,32 @@ public class StepDefinitions {
     public void iTakeScreenshot(String TestCaptura) throws IOException {
         functions.ScreenShot(TestCaptura);
     }
+
+    @Then("^Assert if (.*) contains text (.*)$")
+    public void assertIfElementContainsText(String element, String text) throws Exception {
+        functions.checkPartialTextElementPresent(element, text);
+    }
+
+    @Then("Assert if (.*) is equal to (.*)")
+    public void assertIfElementIsEqualToText(String element, String text) throws Exception {
+        functions.checkTextElementEqualTo(element, text);
+    }
+
+    @Then("Check if (.*) NOT contains text (.*)")
+    public void checkIfElementNOTContainsText(String element, String text) throws Exception {
+        functions.checkPartialTextElementNotPresent(element, text);
+    }
+
+    @Then("Assert if (.*) is Displayed")
+    public void assertIfElementIsDisplayed(String element) throws Exception {
+        boolean isDisplayed = functions.isElementDisplayed(element);
+        Assert.assertTrue("Element is not present: " + element, isDisplayed);
+    }
+
+    @Then("Check if (.*) is NOT Displayed")
+    public void checkIfEmailErrorIsNOTDisplayed(String element) throws Exception {
+        boolean isDisplayed = functions.isElementDisplayed(element);
+        Assert.assertFalse("Element is present: " + element, isDisplayed);
+    }
+
 }
